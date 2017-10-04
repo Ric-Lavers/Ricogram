@@ -9,8 +9,25 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+      <% if current_page?('/')  %>
+        <% if user_signed_in? %>
+        <div>
+        <%= button_to('Logout', destroy_user_session_path, method: :delete , form_class: "login_out") %>
+        </div>
+        <% else %>
+        <div>
+        <%= button_to('Login', new_user_session_path, form_class: "login_out")  %>
+        </div>
+        <% end %>
+      <% end %>
+
+
+      <%= yield %>
+    </div>
+
   </body>
 </html>
