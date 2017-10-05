@@ -28,4 +28,43 @@
 }
 
 
+table th{
+  min-width: 80px;
+  background-color: #ffe;
+}
+table td{
+  min-width: 80px;
+  background-color: #dff;
+}
+.index_button input{
+  background-color: powderblue;
+  border: 3px solid orange;
+  border-radius: 12px;
+  width: 100px;
+  height: 36px;
+}
+.index_button input:hover{
+  background-color: orange;
+}
+img{
+  height:200px;
+}
+.image_show{
+  width:600px;
+  height: 600px;
+}
+@media screen and (max-width: 600px) {
+  .image_show{
+    width:100vw;
+    height: 100vw;
+  }
+}
+
+
  @import  "bootstrap";
+ // .body{
+ //   margin-left: 0;
+ //   margin-right: 0;
+ //   padding-left: 0;
+ //   padding-right: 0;
+ // }

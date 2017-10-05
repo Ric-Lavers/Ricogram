@@ -5,16 +5,17 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.all
+    # @photo.user = current_user
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @photo.user = current_user
   end
 
   # GET /photos/new
   def new
-    
     @photo = Photo.new
   end
 
@@ -26,7 +27,8 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
-
+    @photo.user = current_user #devise method for current user
+    # Created by SCAFFOLD
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
@@ -70,6 +72,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:image_data, :user_id, :caption)
+      params.require(:photo).permit(:image, :user_id, :caption)
     end
 end

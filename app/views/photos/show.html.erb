@@ -1,13 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+
+  <img class="image_show"src="<%=@photo.image_url%>">
+<!-- <p>
   <strong>Image data:</strong>
   <%= @photo.image_data %>
-</p>
+</p> -->
 
 <p>
   <strong>User:</strong>
-  <%= @photo.user %>
+  <%= @photo.user.email %>
 </p>
 
 <p>
