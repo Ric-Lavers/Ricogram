@@ -11,22 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field"><!-- select file to upload -->
     <%= form.label :image_data %>
     <%= form.file_field :image, id: :photo_image_data %>
   </div>
 
-  <div class="field">
+  <div class="field"><!-- enter user_id -->
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :photo_user_id %>
+    <%= form.hidden_field :user_id, id: :photo_user_id %>
+
   </div>
 
-  <div class="field">
+  <div class="field"><!-- enter description -->
     <%= form.label :caption %>
     <%= form.text_field :caption, id: :photo_caption %>
   </div>
 
-  <div class="actions">
+  <div class="actions"><!--  -->
     <%= form.submit %>
   </div>
 <% end %>

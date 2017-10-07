@@ -1,39 +1,65 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Photos</h1>
-
-<%= link_to 'Add Photo', new_photo_path %>
-
-<!-- <%= render @photos %> -->
-
-<table>
-  <thead>
-    <tr>
-      <!-- <th>Image data</th> -->
-      <th>Photo</th>
-      <th>User</th>
-      <th>Caption</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
 
 
-  <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <!-- <td><%= photo.image_data %></td> -->
-        <td><img src="<%=photo.image_url%>"></td>
-        <td><%= photo.user.email %></td>
-        <td><%= photo.caption %></td>
-        <!-- <td><%= link_to 'Show', photo%></td> -->
-        <td><%= link_to 'Show', photo, class: "index_button" %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo), class: "index_button" %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, class: "index_button", data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% @photos.each do |photo| %>
+<% id = photo.id.to_i%>
+<%id.class%>
+
+
+  <div class="newsfeed">
+    <div class="newsfeed-user">
+      <img class="dp" src="/assets/face.png" alt="">
+      <!-- <div class="post-dp"></div> -->
+      <div class="username">
+        <p>user: <strong><%= @users.find_by_id(photo.user_id).email %></strong> </p>
+      </div>
+
+    </div>
+
+
+    <div class="newsfeed-photo">
+      <img src="<%=photo.image_url%>">
+    </div>
+    <div class="newsfeed-likes-comments">
+      <div class="newsfeed-hearts">
+        <img src="/assets/32px-heart.png" alt="">
+      </div>
+      <div class="newsfeed-viewsOrlikes">
+        <strong>... likes</strong>
+      </div>
+      <div class="newsfeed-comments">
+          <strong><%=@users.find_by_id(photo.user_id).email  %></strong>
+          <%= photo.caption %>
+          <a class="more-comments"><span class="grey">more</span></a>
+          <span class="more_text">
+            <%if @comments.where(photo_id: (id))[0] != nil %>
+
+              <%comments = @comments.where(photo_id: (id))%>
+
+              <%comments.each{|i|%> <p class="newsfeed-replies" ><strong><%=@users.find_by_id(i.user_id).email%></strong>  <%=i.message%> </p><%}%>
+            <%end%>
+          </span>
+
+      </div>
+      <div class="newsfeed-hours-ago">
+        <%now = Time.now%>
+        <%= time_ago_in_words(photo.updated_at)%>
+      </div>
+      <div class="newsfeed-add-comment">
+        <%= link_to 'Comment?', new_comment_path%>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+
+
+
+
+
 
 <br>
 

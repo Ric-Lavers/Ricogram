@@ -4,7 +4,11 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
+    @current_user =current_user
+    @comments = Comment.all
+    @myTest = Comment.where(user_id:(@current_user.id))
     @photos = Photo.all
+    @users = User.all
     # @photo.user = current_user
   end
 
@@ -12,11 +16,15 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo.user = current_user
+    @comments = Comment.all
+    @users = User.all
+    @something =  "something"
   end
 
   # GET /photos/new
   def new
     @photo = Photo.new
+    @photo.user = current_user
   end
 
   # GET /photos/1/edit

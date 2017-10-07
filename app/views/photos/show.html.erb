@@ -1,21 +1,67 @@
 <p id="notice"><%= notice %></p>
+<style> body {
+   background-color: #3F3F3F !important;} </style>
+  <p>
+    <strong>Photo ID</strong>
+    <%= @photo.id%><br><%=
+    @photo.user_id%>
+    <strong>Photo uploaded by</strong>
+
+    <h1><%=@users.find_by_id((@photo.user_id)).email %></h1>
+
+    <p>@users.find_by_id(@photo.find_by_id(@photo.id).user_id).email </p>
+
+    <%that = @comments.where(user_id: @photo.id) %>
+
+  </p>
+<div class="wrap">
+  <div class="single-grid">
+    <div class="photo">
+      <img class="image_show"src="<%=@photo.image_url%>">
+    </div>
+    <div class="right">
+      <div class="photo_user">
+        <div class="circle">
+
+        </div>
+        <p>
+          <strong>User:</strong>
+          <%= @photo.user.email %>
+        </p>
+      </div>
+      <div class="comments">
+          <p>
+          <strong><%= @photo.user.email %></strong>
+          <%= @photo.caption %>
+          </p>
+
+        <% that.each do |comment| %>
+            <p>
+              <strong><%= comment.user.email %> </strong>
+              <%= comment.message %>
+            </p>
+        <% end %>
+      </div>
+      <div class="likes">
+        <img src="/assets/32px-heart.png" alt="">
+      </div>
+      <div class="add-comment">
+      <form class="" action="index.html" method="post" >
+  <textarea name="name" rows="3" cols="80"placeholder="Add a comment..."></textarea>
+      </form>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
-  <img class="image_show"src="<%=@photo.image_url%>">
 <!-- <p>
   <strong>Image data:</strong>
   <%= @photo.image_data %>
 </p> -->
 
-<p>
-  <strong>User:</strong>
-  <%= @photo.user.email %>
-</p>
 
-<p>
-  <strong>Caption:</strong>
-  <%= @photo.caption %>
-</p>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

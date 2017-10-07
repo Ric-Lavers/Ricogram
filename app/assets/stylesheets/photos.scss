@@ -1,7 +1,218 @@
 // Place all the styles related to the Photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-img{
-  height:200px;
-  
+
+body{
+  // background-color: #3F3F3F !important;
+}
+*{
+margin:0 auto;
+
+}
+body {
+   background-color:#FAFAFA ;
+}
+// Newsfeed
+.newsfeed{
+  align-items: stretch;
+  background-color: #FFFFFF;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 3px;
+  max-width: 600px;
+  margin-bottom: 60px;
+}
+.newsfeed:first-of-type{
+  margin-top:60px;
+}
+
+.newsfeed-user{
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  height: 60px;
+  padding: 16px;
+  .post-dp{
+    margin: 0;
+    height: 30px;
+    width:30px;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-image: image();
+    background-color: red;
+  }
+  .dp{
+    margin: 0;
+    height: 30px;
+    width:30px;
+    border-radius: 15px;
+  }
+  .username{
+    margin: 5px 0 0 12px;
+  }
+}
+.newsfeed-photo{
+  max-height: 600px;
+  img{
+    width: 100%;
+    max-height: 600px;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.newsfeed-likes-comments{
+ background-color: white;
+ padding: 0 16px;
+ .newsfeed-replies{
+   padding:6px 0 6px
+ }
+}
+.more_text{
+  display: none;
+}
+  .newsfeed-hearts{
+    height:  40px;
+    img{
+      width:24px;
+      height:24px;
+      cursor:pointer;
+    }
+  }
+  .newsfeed-viewsOrlikes{
+    height: 19px;
+  }
+  .newsfeed-comments{
+    min-height: 42px;
+    .grey{
+      color:grey;
+    }
+    .more-comments:hover{
+      background-color: transparent;
+      cursor:pointer;
+    }
+  }
+  .newsfeed-hours-ago{
+    height: 19px;
+    color: rgb(153, 153, 153);
+
+  }
+  .newsfeed-add-comment{}
+//
+
+
+
+.user-index{
+  height:60px;
+
+}
+.likes-time-index{
+  height:59px;
+}
+.wrap{
+  position: relative;
+  display: flex;
+  width: 100vw;
+// margin: 0 auto;
+}
+.photo{
+  grid-area: photo;
+  max-width: 600px;
+  max-height:600px;
+  img{
+    object-fit:100%;
+    height: 100%;
+  }
+}
+.right{
+  grid-area: right;
+  width: 100%;
+}
+
+.photo_user{
+  // grid-area: right;
+  border:2px black dashed;
+  height:80px;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+    .circle{
+      margin: 20px;
+      height: 40px;
+      width:40px;
+      border-radius: 20px;
+      border: 1px solid black;
+      background-image: src("/assets/32px-heart.png");
+      background-size: contain;
+      background-color: red;
+    }
+.comments{
+  // grid-area: right;
+  border:2px black dashed;
+  max-height:420px;
+  padding: 0 24px;
+  height: 100%;
+  margin: 0;
+
+}
+
+
+.add-comment{
+  height: 100%;
+  // grid-area: right;
+  border:2px black dashed;
+  max-height:60px;
+  textarea{
+    width: 98%;
+    height:98%;
+    font-size: 1em;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+  }
+}
+
+.likes img{
+  box-sizing:content-box;
+  background-color: transparent;
+  border: none;
+  left:0;
+  cursor: pointer;
+  padding: 8px ;
+  margin-left: 16px;
+  height:24px;
+  width: 24px;
+
+}
+.like-heart{
+  height:24px;
+  width: 24px;
+  padding:1px;
+  padding-left:26px;
+  padding-bottom: 18px;
+  background-image:image("/assets/32px-heart.png");
+  background-size: contain;
+  // background-color: red;
+}
+.single-grid{
+  // position: relative;
+  justify-content: center;
+  width:935px;
+  height: 600px;
+  margin: 0 ;
+  background-color: #FCFCFC;
+
+  display:grid;
+  grid-template-columns: 600px 335px ;
+  grid-template-rows: 80px 420px 44px 56px;
+  grid-template-rows: 600px;
+  grid-template-areas:
+  'photo right'
+;
+  justify-content: center;
+}
+
+.image_show{
+  width:600px;
+  height: 600px;
 }

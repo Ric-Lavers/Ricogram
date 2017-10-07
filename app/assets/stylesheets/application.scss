@@ -13,6 +13,22 @@
 
  */
  // Custom bootstrap variables must be set or imported *before* bootstrap.
+
+ /* ...
+ *= require_self
+ *= require_tree .
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:300,400,700|Roboto:300,400,500,700');
+*{
+  box-sizing:border-box;
+  // margin:0 auto;
+}
+ body{
+   font-family: 'Noto Sans','Roboto', sans-serif;
+  //  background-color: #3F3F3F;
+ }
+
 .alert{
   margin-bottom:0px;
 }
@@ -26,8 +42,38 @@
   width: 100px;
 
 }
-
-
+.banner{
+  position: fixed;
+  top:0;
+  left:0;
+  background-color: white;
+  width: 100%;
+  height: 76px;
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  .logos{
+    // height: 25px;
+    padding: 26 40;
+    display: flex;
+    justify-content: flex-start;
+    .camera{
+      border: 1px solid green;
+      height: 35px;
+      width: 176px;
+      background-image: url("/assets/instagram-glyph.svg");
+      background-size: contain;
+    }
+    .text{
+      border: 1px solid green;
+      background-image:url("assets/instagram.svg");
+      background-size: contain;
+    }
+  }
+}
+.container{
+  margin-top: 76px;
+}
 table th{
   min-width: 80px;
   background-color: #ffe;
@@ -36,23 +82,21 @@ table td{
   min-width: 80px;
   background-color: #dff;
 }
-.index_button input{
+.index_button a{
   background-color: powderblue;
   border: 3px solid orange;
   border-radius: 12px;
   width: 100px;
   height: 36px;
 }
-.index_button input:hover{
+.index_button a:hover{
   background-color: orange;
 }
 img{
+text-align: center;
   height:200px;
 }
-.image_show{
-  width:600px;
-  height: 600px;
-}
+
 @media screen and (max-width: 600px) {
   .image_show{
     width:100vw;
@@ -61,7 +105,8 @@ img{
 }
 
 
- @import  "bootstrap";
+
+
  // .body{
  //   margin-left: 0;
  //   margin-right: 0;
