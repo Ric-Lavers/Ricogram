@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @current_user =current_user
+    @current_user = current_user
     @comments = Comment.all
     @myTest = Comment.where(user_id:(@current_user.id))
     @photos = Photo.all

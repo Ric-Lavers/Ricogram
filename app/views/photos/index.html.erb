@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
-
-
-
 <% @photos.each do |photo| %>
 <% id = photo.id.to_i%>
 <%id.class%>
@@ -25,7 +21,9 @@
     </div>
     <div class="newsfeed-likes-comments">
       <div class="newsfeed-hearts">
-        <img src="/assets/32px-heart.png" alt="">
+
+        <img class="likes" src="/assets/hearts-01.png" alt="">
+
       </div>
       <div class="newsfeed-viewsOrlikes">
         <strong>... likes</strong>
@@ -33,10 +31,10 @@
       <div class="newsfeed-comments">
           <strong><%=@users.find_by_id(photo.user_id).email  %></strong>
           <%= photo.caption %>
-          <a class="more-comments"><span class="grey">more</span></a>
-          <span class="more_text">
-            <%if @comments.where(photo_id: (id))[0] != nil %>
 
+            <%if @comments.where(photo_id: (id))[0] != nil %>
+              <a class="more-comments"><span class="grey">more</span></a>
+              <span class="more_text">
               <%comments = @comments.where(photo_id: (id))%>
 
               <%comments.each{|i|%> <p class="newsfeed-replies" ><strong><%=@users.find_by_id(i.user_id).email%></strong>  <%=i.message%> </p><%}%>
@@ -46,7 +44,7 @@
       </div>
       <div class="newsfeed-hours-ago">
         <%now = Time.now%>
-        <%= time_ago_in_words(photo.updated_at)%>
+        <%= time_ago_in_words(photo.updated_at)%> ago
       </div>
       <div class="newsfeed-add-comment">
         <%= link_to 'Comment?', new_comment_path%>

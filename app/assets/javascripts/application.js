@@ -24,7 +24,16 @@ $(function(){ /* to make sure the script runs after page load */
         event.preventDefault(); /* prevent the a from changing the url */
         $(this).parents('.newsfeed-comments').find('.more_text').show(); /* show the .more_text span */
         $(this).hide();
-
     });
+});
 
+$(".likes")click(function(){
+  if ($(this).hasClass("likes")) {
+    console.log("working");
+    $(this).attr('src', '/assets/hearts-02.png');
+    $(this).addClass("liked");
+  }else{
+    $(this).attr('src', '/assets/hearts-01.png');
+    $(this).addClass("likes");
+  };
 });

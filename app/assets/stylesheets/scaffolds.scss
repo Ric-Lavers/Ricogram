@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:300,400,700|Roboto:300,400,500,700');
 body {
-  background-color: #fff;
   color: #333;
   margin: 33px;
   font-family: 'Noto Sans','Roboto', sans-serif;
@@ -30,7 +29,7 @@ a {
 
   &:hover {
     color: #fff;
-    background-color: #000;
+    background-color: rgba(#000,0.6);
   }
 }
 

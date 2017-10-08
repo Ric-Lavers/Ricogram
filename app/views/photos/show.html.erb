@@ -1,15 +1,18 @@
 <p id="notice"><%= notice %></p>
 <style> body {
-   background-color: #3F3F3F !important;} </style>
+   background-color: #3F3F3F !important;}
+   .banner{
+      background-color: #3F3F3F !important;
+      border-color:  #3F3F3F ;
+   } </style>
   <p>
     <strong>Photo ID</strong>
-    <%= @photo.id%><br><%=
+    <% @photo.id%><br><%
     @photo.user_id%>
-    <strong>Photo uploaded by</strong>
 
-    <h1><%=@users.find_by_id((@photo.user_id)).email %></h1>
+    <%@users.find_by_id((@photo.user_id)).email %>
 
-    <p>@users.find_by_id(@photo.find_by_id(@photo.id).user_id).email </p>
+    <!-- <p>@users.find_by_id(@photo.find_by_id(@photo.id).user_id).email </p> -->
 
     <%that = @comments.where(user_id: @photo.id) %>
 

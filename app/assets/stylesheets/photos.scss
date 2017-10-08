@@ -22,7 +22,7 @@ body {
   margin-bottom: 60px;
 }
 .newsfeed:first-of-type{
-  margin-top:60px;
+  margin-top:136px;
 }
 
 .newsfeed-user{
@@ -71,10 +71,14 @@ body {
 }
   .newsfeed-hearts{
     height:  40px;
-    img{
-      width:24px;
-      height:24px;
+    margin: 0 0;
+    background-image:src("/assets/hearts-02.png");
+    background-size: contain;
+    .likes{
+      width:30px;
+      height:30px;
       cursor:pointer;
+
     }
   }
   .newsfeed-viewsOrlikes{

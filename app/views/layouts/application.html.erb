@@ -10,33 +10,43 @@
 
   <body>
     <div class="banner">
+<%= link_to root_path, class: "home" do%>
       <div class="logos">
+
         <div class="camera"></div>
-        <div class="text"></div>
+
+        <div class="line"></div>
+        <div class="ricagram">Ricagram</div>
       </div>
+<%end%>
       <%= link_to 'Add Photo', new_photo_path %>
       <%= link_to 'Add Comment', new_comment_path%>
+      <div class="dropdown">
+        <h4 class="menu">SETTINGS</h4>
+        <div class="drop"><p>
+          <% if @current_user != nil %>
+             <%=@current_user.email.split("@")[0][0..16]%>
+          <% end %>
+         </p>
+</div>
+      <% if user_signed_in? %>
+
+          <div class="dropdown-content">
+          <%= button_to('Logout', destroy_user_session_path, method: :delete , form_class: "login_out") %>
+          </div>
+
+        <% else %>
+          <div class="dropdown-content">
+          <%= button_to('Login', new_user_session_path, form_class: "login_out")  %>
+          </div>
+        <% end %>
+      </div>
+
     </div>
     <div class="container">
 
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <% if user_signed_in? %>
-
-      <% else %>
-      <% end %>
-      <% if current_page?('/')  %>
-        <% if user_signed_in? %>
-        <div>
-        <%= button_to('Logout', destroy_user_session_path, method: :delete , form_class: "login_out") %>
-        </div>
-        <% else %>
-        <div>
-        <%= button_to('Login', new_user_session_path, form_class: "login_out")  %>
-        </div>
-        <% end %>
-      <% end %>
-
 
       <%= yield %>
     </div>
