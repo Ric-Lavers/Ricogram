@@ -38,7 +38,11 @@
 .notice{
   margin-bottom:0px;
 }
-
+// for JS
+.hide{
+  position: absolute;
+  z-index: -100;
+}
 //Logout
 .dropdown{
     padding:8px;

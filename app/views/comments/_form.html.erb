@@ -23,8 +23,8 @@
   </div>
 <h1><%= @x%></h1>
   <div class="field">
-    <%= form.label :photo_id %>
-    <%= form.text_field :photo_id, id: :comment_photo_id %>
+    <% form.label :photo_id%>
+    <%= form.hidden_field :photo_id, id: :comment_photo_id %>
   </div>
 
   <div class="actions">

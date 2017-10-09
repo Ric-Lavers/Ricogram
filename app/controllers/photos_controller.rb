@@ -72,6 +72,15 @@ class PhotosController < ApplicationController
     end
   end
 
+  def downvote
+    @photo = Photo.find(params[:id])
+    @photo.downvote_by current_user
+  end 
+  def upvote
+    @photo = Photo.find(params[:id])
+    @photo.upvote_by current_user
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo

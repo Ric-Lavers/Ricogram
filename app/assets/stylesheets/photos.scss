@@ -72,15 +72,25 @@ body {
   .newsfeed-hearts{
     height:  40px;
     margin: 0 0;
-    background-image:src("/assets/hearts-02.png");
-    background-size: contain;
+    display: flex;
+    // justify-content: flex-start;
+    .hearts{
+      margin: 0 0;
+      height:  35px;
+      width: 35px;
+      background-image: image-url("hearts-01.png");
+      background-size:contain;
+    }
+    .liked{
+      background-image: image-url("hearts-02.png");
+    }
     .likes{
       width:30px;
       height:30px;
       cursor:pointer;
-
     }
   }
+
   .newsfeed-viewsOrlikes{
     height: 19px;
   }
@@ -97,7 +107,6 @@ body {
   .newsfeed-hours-ago{
     height: 19px;
     color: rgb(153, 153, 153);
-
   }
   .newsfeed-add-comment{}
 //

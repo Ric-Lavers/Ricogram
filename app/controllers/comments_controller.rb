@@ -14,8 +14,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-
-    @comment = Comment.new
+    @comment = Comment.new(:photo_id=>params[:comment_photo_id])
+    # @comment = Comment.new
   end
 
   # GET /comments/1/edit
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
   def create
 
     @comment = Comment.new(comment_params)
-    @comment.photo_id = Comment.find(params[:photoID])
+    # @comment.photo_id = Comment.find(params[:photoID])
     @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save

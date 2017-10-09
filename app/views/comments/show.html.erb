@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <p>
   <strong>Message:</strong>
@@ -7,12 +7,17 @@
 
 <p>
   <strong>User:</strong>
-  <%= @comment.user %>
+  <%= @comment.user.email %>
 </p>
 
 <p>
   <strong>Photo:</strong>
-  <%= @comment.photo %>
+    <%= @comment.photo.id %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @comment.photo.caption %>
 </p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
