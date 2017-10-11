@@ -10,9 +10,15 @@
     <div class="user-details">
       <div class="name">
       <%=@profile.user_name%>
+      <%if current_user.id == @profile.user.id%>
+        <div class="edit-profile">
+          <%= link_to 'Edit profile', edit_profile_path(@profile) %> 
+        </div>
+      <%else%>
         <div class="following">
           <button type="button" name="button">-Following-</button>
         </div>
+      <%end%>
       </div>
 
       <div class="stats">
@@ -45,7 +51,4 @@
 </div>
 
 
-
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

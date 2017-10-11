@@ -5,23 +5,20 @@
 <% id = photo.id.to_i%>
 
 
-
-
-
-
   <div class="newsfeed">
-    <div class="newsfeed-user">
-      <!-- <img class="dp" src="/assets/face.png" alt=""> -->
+    <%= link_to profile_path(photo.user.profile.id), class: "newsfeed-user-link" do%>
+      <div class="newsfeed-user">
+        <!-- <img class="dp" src="/assets/face.png" alt=""> -->
 
-      <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
+        <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
 
-      <!-- <div class="post-dp"></div> -->
-      <div class="username">
-        <p>user: <strong><%= @users.find_by_id(photo.user_id).email %></strong> </p>
+        <!-- <div class="post-dp"></div> -->
+        <div class="username">
+          <p><strong><%= @users.find_by_id(photo.user_id).email %></strong> </p>
+        </div>
+
       </div>
-
-    </div>
-
+    <%end%>
 
     <div class="newsfeed-photo">
       <img src="<%=photo.image_url%>">
@@ -81,8 +78,8 @@
     </div>
     <div class="">
 
-      <%= link_to 'like', like_photo_path(photo), :class => "upvote", :method => :put %>
-      <%= link_to 'dislike', dislike_photo_path(photo), :class => "upvote", :method => :put %>
+      <% link_to 'like', like_photo_path(photo), :class => "upvote", :method => :put %>
+      <% link_to 'dislike', dislike_photo_path(photo), :class => "upvote", :method => :put %>
 
     <% photo.get_upvotes.size  %>
     <% photo.get_downvotes.size  %>
