@@ -34,14 +34,8 @@ $(function(){
     $(this).toggleClass('liked');
   });
 });
-//
-// $(".likes")click(function(){
-//   if ($(this).hasClass("likes")) {
-//     console.log("working");
-//     $(this).attr('src', '/assets/hearts-02.png');
-//     $(this).addClass("liked");
-//   }else{
-//     $(this).attr('src', '/assets/hearts-01.png');
-//     $(this).addClass("likes");
-//   };
+// $(function(){
+//   $(".liked").click(function(){
+//     $(this).toggleClass('hearts');
+//   });
 // });

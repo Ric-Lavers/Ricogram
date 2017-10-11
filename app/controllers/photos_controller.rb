@@ -5,16 +5,21 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @current_user = current_user
-    @comments = Comment.all
-    @myTest = Comment.where(user_id:(@current_user.id))
+
+
+    # @myTest = Comment.where(user_id:(@current_user.id))
     @photos = Photo.all
     @users = User.all
+    @comments = Comment.all
+    @comment = Comment.new
+    @profiles = Profile.all
     # @photo.user = current_user
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @photos = Photo.all
     @photo.user = current_user
     @comments = Comment.all
     @users = User.all
@@ -75,7 +80,7 @@ class PhotosController < ApplicationController
   def downvote
     @photo = Photo.find(params[:id])
     @photo.downvote_by current_user
-  end 
+  end
   def upvote
     @photo = Photo.find(params[:id])
     @photo.upvote_by current_user

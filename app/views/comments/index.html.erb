@@ -20,9 +20,9 @@
         <td><%= comment.user_id %></td>
         <td><%= comment.user.email %></td>
         <td><%= comment.photo_id %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', photo_comment_path(comment.photo_id, comment.id) %></td>
+        <td><%= link_to 'Edit', edit_photo_comment_path(comment.photo_id, comment.id) %></td>
+        <td><%= link_to 'Destroy', photo_comment_path(comment.photo_id, comment.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= link_to 'New Comment', new_photo_comment_path(@photo_id) %>

@@ -11,6 +11,9 @@ gem 'jquery-rails'
 gem "shrine"
 gem 'acts_as_votable', '~> 0.10.0'
 
+group :development do
+  gem 'guard-livereload', '~> 2.5', require: false
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

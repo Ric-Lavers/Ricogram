@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :photos
+  resources :profiles
+  # resources :comments
+  # resources :photos do
+  #   resources :comments
+  # end
   devise_for :users
 
   resources :photos do
+    resources :comments
     member do
       put "like", to: "photos#upvote"
       put "dislike", to: "photos#downvote"

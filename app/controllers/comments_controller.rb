@@ -5,17 +5,20 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    puts "params is: #{params.inspect}"
+    @photo_id = params[:photo_id]
   end
 
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @comments.user = current_user
   end
 
   # GET /comments/new
   def new
-    @comment = Comment.new(:photo_id=>params[:comment_photo_id])
-    # @comment = Comment.new
+    # @comment = Comment.new(:photo_id=>params[:comment_photo_id])
+    @comment = Comment.new
   end
 
   # GET /comments/1/edit
@@ -25,16 +28,29 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    # @comment = @photo.comments.build(comment_params)
+    # @comments.user = current_user
+    # @comment.save
+    # redirect_to root_path
 
     @comment = Comment.new(comment_params)
     # @comment.photo_id = Comment.find(params[:photoID])
     @comment.user_id = current_user.id
+
+    puts "____________"
+    puts "comment_params is: #{comment_params}"
+    puts "____________"
+    puts "current_user.id is: #{current_user.id}"
+    puts "____________"
+    puts "@comment is: #{@comment.inspect}"
+    puts "____________"
+
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to photos_path }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { render :new }
+        format.html { redirect_to photos_path }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -68,10 +84,12 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
+      # @photo = Photo.find(params[:photo_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
+      # params.require(:comment).permit(:message)
       params.require(:comment).permit(:message, :user_id, :photo_id)
     end
 end

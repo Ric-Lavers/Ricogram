@@ -24,7 +24,12 @@ body {
 .newsfeed:first-of-type{
   margin-top:136px;
 }
-
+.dp{
+  margin: 0;
+  height: 30px;
+  width:30px;
+  border-radius: 15px;
+}
 .newsfeed-user{
   margin: 0;
   display: flex;
@@ -40,12 +45,7 @@ body {
     background-image: image();
     background-color: red;
   }
-  .dp{
-    margin: 0;
-    height: 30px;
-    width:30px;
-    border-radius: 15px;
-  }
+
   .username{
     margin: 5px 0 0 12px;
   }
@@ -71,18 +71,32 @@ body {
 }
   .newsfeed-hearts{
     height:  40px;
+    width: 40px;
     margin: 0 0;
     display: flex;
-    // justify-content: flex-start;
+    justify-content: flex-start;
+    a{
+      border: 0xpx solid black;
+      // z-index: 150;
+    }
+    a:hover{
+      background-color: transparent;
+    }
     .hearts{
       margin: 0 0;
       height:  35px;
       width: 35px;
       background-image: image-url("hearts-01.png");
       background-size:contain;
+      transition: background-image 0.4s;
     }
-    .liked{
+    .liked {
+      margin: 0 0;
+      height:  35px;
+      width: 35px;
       background-image: image-url("hearts-02.png");
+      background-size:contain;
+      transition: background-image 0.4s;
     }
     .likes{
       width:30px;
@@ -103,12 +117,19 @@ body {
       background-color: transparent;
       cursor:pointer;
     }
+
   }
   .newsfeed-hours-ago{
     height: 19px;
     color: rgb(153, 153, 153);
   }
-  .newsfeed-add-comment{}
+  .newsfeed-add-comment{
+    display: flex;
+    align-items: flex-start;
+    max-width: 560px;
+  }
+
+
 //
 
 

@@ -3,12 +3,18 @@
 
 <% @photos.reverse.each do |photo| %>
 <% id = photo.id.to_i%>
-<%id.class%>
+
+
+
+
 
 
   <div class="newsfeed">
     <div class="newsfeed-user">
-      <img class="dp" src="/assets/face.png" alt="">
+      <!-- <img class="dp" src="/assets/face.png" alt=""> -->
+
+      <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
+
       <!-- <div class="post-dp"></div> -->
       <div class="username">
         <p>user: <strong><%= @users.find_by_id(photo.user_id).email %></strong> </p>
@@ -21,12 +27,22 @@
       <img src="<%=photo.image_url%>">
     </div>
     <div class="newsfeed-likes-comments">
-
-    <%= link_to like_photo_path(photo), :class => "upvote", :method => :put  do%>
       <div class="newsfeed-hearts">
+    <% if (current_user.voted_as_when_voted_for photo) == false%>
+    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
         <div class="hearts"></div>
-      </div>
+        <%end%>
+    <% elsif (current_user.voted_as_when_voted_for photo) == true%>
+      <%= link_to dislike_photo_path(photo),class: "heart-link", :method => :put do%>
+        <div class="liked"></div>
+        <%end%>
+    <% else (current_user.voted_as_when_voted_for photo) == false%>
+    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
+        <div class="hearts"></div>
+        <%end%>
     <%end%>
+      </div>
+    <%current_user.voted_as_when_voted_for photo%>
 
       <div class="newsfeed-viewsOrlikes">
         <strong><span><%= photo.get_upvotes.size  %></span> likes</strong>
@@ -50,20 +66,33 @@
         <%= time_ago_in_words(photo.updated_at)%> ago
       </div>
       <div class="newsfeed-add-comment">
-        <%= link_to 'Comment?', new_comment_path(:comment_photo_id=> photo.id)%>
+
+
+        <%= form_with(model: [photo, @comment], local: true) do |f|%>
+
+          <%= f.text_area :message, class: "add-a-comment", placeholder: "Add a comment..."%>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :photo_id, :value => photo.id %>
+          <%= f.submit %>
+        <%end%>
       </div>
+
 
     </div>
     <div class="">
 
-      <% link_to 'like', like_photo_path(photo), :class => "upvote", :method => :put %>
-      <% link_to 'dislike', dislike_photo_path(photo), :class => "upvote", :method => :put %>
+      <%= link_to 'like', like_photo_path(photo), :class => "upvote", :method => :put %>
+      <%= link_to 'dislike', dislike_photo_path(photo), :class => "upvote", :method => :put %>
 
     <% photo.get_upvotes.size  %>
     <% photo.get_downvotes.size  %>
     <% current_user.voted_for? photo %>
+    <!-- <p>has the current used liked <strong> -->
     <% current_user.voted_as_when_voted_for photo%>
-    <%photo.liked_by current_user%>
+  <!-- </strong></p> -->
+
+
+
 
 
 

@@ -1,0 +1,78 @@
+// Place all the styles related to the Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-profile{
+  margin-top: 134px;
+  margin-left: 20px;
+
+}
+
+.profile-info{
+  max-width: 935px;
+  height: 152px;
+  margin-bottom: 44px;
+  display: flex;
+  align-items:stretch;
+
+  .display-picture{
+    max-width: 150px;
+    margin:0;
+  }
+  .dp-large{
+    width:152px;
+    height: 152px;
+    border: 1px solid rgba(0,0,0,0.1);
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  .name{
+    font-size: 32px;
+    padding:12px;
+  }
+  .user-details{
+    width: 100%;
+    margin-left: 30px;
+    text-align: left;
+    // border: 1px solid red;
+
+  }
+  .bio{
+    padding:20px;
+  }
+  .name{
+
+    margin-left: 0;
+    max-width: 218px;
+    max-width: 50%;
+    display: flex;
+    align-items:flex-start;
+  }
+  .stats{
+    display: flex;
+    align-items: flex-start;
+    margin-left: 20px;
+    width: 60%;
+    font-size: 1.2em;
+    .num-post,.num-followers,
+.num-following{
+      margin-left: 0;
+    }
+
+  }
+
+}
+
+.photo-grid{
+  max-width: 935px;
+  display: grid;
+  grid-gap:24px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.profile-images{
+  object-fit: cover;
+
+  width: 294px;
+  height:294px;
+
+}
