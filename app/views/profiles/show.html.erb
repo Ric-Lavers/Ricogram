@@ -26,8 +26,15 @@
       </div>
     </div>
   </div>
+  <%@profile.id%>
+  <%params["id"] %>
+  <%Photo.find_by_id(@profile.id).id %>
+
+
+  <br>
 
   <div class="photo-grid">
+
 
     <% @photos.reverse.each do |photo| %>
       <img class= "profile-images" src="<%=photo.image_url%>">

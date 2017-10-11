@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
+    @users = User.all
     @profiles = Profile.all
     @current_user = current_user
   end
@@ -13,7 +14,16 @@ class ProfilesController < ApplicationController
   def show
     @current_user = current_user
     @profiles = Profile.all
-    @photos = Photo.where(user_id: current_user.id)
+    @photoAll = Photo.all
+    # @photos = Photo.find_by_id(@profile.id)
+    current_profile = Profile.find_by(id: params[:id])
+    # puts "current: #{current_profile}"
+    # puts current_profile.user.id
+    @photos = Photo.where(user_id: current_profile.user.id)
+    # verify that the photos below to the profile id shown in the url
+    # @photos.each do |photo|
+    #   puts Profile.find_by(user_id: photo.user_id).id
+    # end
   end
 
   # GET /profiles/new
