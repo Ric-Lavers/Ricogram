@@ -14,7 +14,7 @@
 
         <!-- <div class="post-dp"></div> -->
         <div class="username">
-          <p><strong><%= @users.find_by_id(photo.user_id).email %></strong> </p>
+          <p><strong><%= @profiles.find_by_user_id(photo.user_id).user_name %></strong> </p>
         </div>
 
       </div>

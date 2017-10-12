@@ -49,9 +49,11 @@ body {
     color:black;
   }
 
-  .username{
+  .username {
     margin: 5px 0 0 12px;
   }
+  .username strong {
+    text-decoration: none !important;}
 }
 .newsfeed-photo{
   max-height: 600px;
