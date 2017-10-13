@@ -40,12 +40,45 @@
 
   <div class="photo-grid">
 
+<script type="text/javascript">
+  count = 0;
+</script>
+<script src="jquery-3.2.1.min.js"></script>
 
-    <% @photos.reverse.each do |photo| %>
-    <div class="profile-images-overlay">
-      <img class= "profile-images" src="<%=photo.image_url%>">
+
+    <% @photos.reverse.each_with_index do |photo,i| %>
+
+    <div class="profile-images-overlay" id="col_<%=i%3%>">
+      <img id= "profile-images<%=i%>" class="profile-images" src="<%=photo.image_url%>">
+
     </div>
 
+
+<script type="text/javascript">
+console.log(document.documentElement.clientWidth);
+  // $( window ).resize(function() {
+  // if (document.documentElement.clientWidth > 986) {
+    var daImg = document.getElementById('profile-images<%=i%>');
+    var width = daImg.naturalWidth;
+    var height = daImg.naturalHeight;
+    console.log(daImg, width, height);
+    console.log(height/width);
+  // replace the image container (currently named profile-images-overlay) and add class grid-column: 2 / span 2; and change width to 100%
+  console.log("count is: " + count);
+    if(width/height >=1.5 && (<%=i%>+count)%3 ===0){
+      console.log("yesh this is a doubler");
+      count +=1
+      daImg.parentNode.classList.add("grid-column-0");
+    }
+    else if(width/height >=1.5 && (<%=i%>+count)%3 ===1){
+      console.log("yesh this is a doubler");
+      count +=1
+      daImg.parentNode.classList.add("grid-column-1");
+    };
+  // };
+// });
+
+</script>
     <%end%>
 
   </div>
@@ -54,3 +87,4 @@
 
 
 <%= link_to 'Back', profiles_path %>
+<%=@profile.user.email%>

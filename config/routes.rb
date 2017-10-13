@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # resources :photos do
   #   resources :comments
   # end
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   resources :photos do
     resources :comments
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "home/index"
 
   root  'photos#index'
 
