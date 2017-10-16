@@ -146,12 +146,13 @@ body {
 .likes-time-index{
   height:59px;
 }
-.wrap{
-  position: relative;
-  display: flex;
-  width: 100vw;
-// margin: 0 auto;
-}
+// .wrap{
+//   position: relative;
+//   display: flex;
+//   width: 100vw;
+// // margin: 0 auto;
+// }
+
 .photo{
   grid-area: photo;
   max-width: 600px;
@@ -167,7 +168,6 @@ body {
 }
 
 .photo_user{
-  // grid-area: right;
   border:2px black dashed;
   height:80px;
   width:100%;
@@ -198,7 +198,6 @@ body {
 
 .add-comment{
   height: 100%;
-  // grid-area: right;
   border:2px black dashed;
   max-height:60px;
   textarea{
@@ -235,15 +234,15 @@ body {
 }
 .single-grid{
   // position: relative;
-  justify-content: center;
+  // justify-content: center;
   width:935px;
   height: 600px;
-  margin: 0 ;
+  margin: 0 auto;
   background-color: #FCFCFC;
 
   display:grid;
   grid-template-columns: 600px 335px ;
-  grid-template-rows: 80px 420px 44px 56px;
+  // grid-template-rows: 80px 420px 44px 56px;
   grid-template-rows: 600px;
   grid-template-areas:
   'photo right'

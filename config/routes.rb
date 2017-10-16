@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # end
   devise_for :users, controllers: { registrations: "registrations" }
 
+#resources :user, only: [:show], controller: :profiles
   resources :photos do
     resources :comments
     member do

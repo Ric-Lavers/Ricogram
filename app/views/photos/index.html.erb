@@ -8,8 +8,6 @@
   <div class="newsfeed">
     <%= link_to profile_path(photo.user.profile.id), class: "newsfeed-user-link" do%>
       <div class="newsfeed-user">
-        <!-- <img class="dp" src="/assets/face.png" alt=""> -->
-
         <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
 
         <!-- <div class="post-dp"></div> -->
@@ -42,7 +40,11 @@
     <%current_user.voted_as_when_voted_for photo%>
 
       <div class="newsfeed-viewsOrlikes">
-        <strong><span><%= photo.get_upvotes.size  %></span> likes</strong>
+        <strong><span id="upvotes-size"><%= photo.get_upvotes.size  %></span> likes</strong>
+        <script type="text/javascript">
+          
+        </script>
+
       </div>
       <div class="newsfeed-comments">
           <strong><%=@users.find_by_id(photo.user_id).email  %></strong>
