@@ -4,8 +4,9 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @current_user = current_user
-
+    if current_user.profile == nil
+      redirect_to(controller: :profiles, action: :new)
+    end
 
     # @myTest = Comment.where(user_id:(@current_user.id))
     @photos = Photo.all
@@ -13,7 +14,6 @@ class PhotosController < ApplicationController
     @comments = Comment.all
     @comment = Comment.new
     @profiles = Profile.all
-    # @photo.user = current_user
   end
 
   # GET /photos/1
@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
     @photo.user = current_user
     @comments = Comment.all
     @users = User.all
-    
+
     @something =  "something"
   end
 

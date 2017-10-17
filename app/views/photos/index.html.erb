@@ -4,9 +4,9 @@
 <% @photos.reverse.each do |photo| %>
 <% id = photo.id.to_i%>
 
-
   <div class="newsfeed">
-    <%= link_to profile_path(photo.user.profile.id), class: "newsfeed-user-link" do%>
+    <%= link_to user_path(photo.user), class: "newsfeed-user-link" do%>
+
       <div class="newsfeed-user">
         <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
 
@@ -42,12 +42,12 @@
       <div class="newsfeed-viewsOrlikes">
         <strong><span id="upvotes-size"><%= photo.get_upvotes.size  %></span> likes</strong>
         <script type="text/javascript">
-          
+
         </script>
 
       </div>
       <div class="newsfeed-comments">
-          <strong><%=@users.find_by_id(photo.user_id).email  %></strong>
+          <strong><%=@users.find_by_id(photo.user_id).profile.user_name  %></strong>
           <%= photo.caption %>
 
             <%if @comments.where(photo_id: (id))[0] != nil %>
@@ -55,7 +55,7 @@
               <span class="more_text">
               <%comments = @comments.where(photo_id: (id))%>
 
-              <%comments.each{|i|%> <p class="newsfeed-replies" ><strong><%=@users.find_by_id(i.user_id).email%></strong>  <%=i.message%> </p><%}%>
+              <%comments.each{|i|%> <p class="newsfeed-replies" ><strong><%=@users.find_by_id(i.user_id).profile.user_name%></strong>  <%=i.message%> </p><%}%>
             <%end%>
           </span>
 
