@@ -11,6 +11,10 @@ gem 'jquery-rails'
 gem "shrine"
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'colorize'
+gem "aws-sdk-s3", "~> 1.2"
+group :development do
+    gem 'dotenv-rails'
+end
 
 group :development do
   gem 'guard-livereload', '~> 2.5', require: false
@@ -42,6 +46,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :production do
+  gem 'pg'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
