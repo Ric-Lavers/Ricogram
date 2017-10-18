@@ -29,7 +29,7 @@
 
           <%= form.hidden_field :toggle_follow, value: true%>
           <%= form.button @profile.user.followed_by?(current_user) ? 'Unfollow' : 'Follow',
-        class: 'btn btn-primary btn-block' %>
+        class: 'btn btn-primary btn-block', remote: true %>
 
         <%end%>
       </div>

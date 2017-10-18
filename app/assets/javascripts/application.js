@@ -31,7 +31,15 @@ $(document).ready(function(){ /* to make sure the script runs after page load */
 
 $(function(){
   $(".hearts").click(function(){
-    $(this).toggleClass('liked');
+    $(this).removeClass('hearts');
+    $(this).addClass('liked');
+  });
+});
+
+$(function(){
+  $(".liked").click(function(){
+    $(this).removeClass('liked');
+    $(this).addClass('hearts');
   });
 });
 // $(function(){

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 
-<% @photos.reverse.each do |photo| %>
+<% @photos.reverse.each_with_index do |photo, index| %>
 <% id = photo.id.to_i%>
 
   <div class="newsfeed">
@@ -9,8 +9,6 @@
 
       <div class="newsfeed-user">
         <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
-
-        <!-- <div class="post-dp"></div> -->
         <div class="username">
           <p><strong><%= @profiles.find_by_user_id(photo.user_id).user_name %></strong> </p>
         </div>
@@ -18,29 +16,40 @@
       </div>
     <%end%>
 
-    <div class="newsfeed-photo">
-      <img src="<%=photo.image_url%>">
-    </div>
+    <%= link_to photo_path(photo.id) do%>
+      <div class="newsfeed-photo">
+        <img src="<%=photo.image_url%>">
+      </div>
+    <%end%>
+
     <div class="newsfeed-likes-comments">
       <div class="newsfeed-hearts">
+
     <% if (current_user.voted_as_when_voted_for photo) == false%>
-    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
+      <%= link_to like_photo_path(photo), class: "heart-link", remote: true, :method => :put  do %>
         <div class="hearts"></div>
         <%end%>
     <% elsif (current_user.voted_as_when_voted_for photo) == true%>
-      <%= link_to dislike_photo_path(photo),class: "heart-link", :method => :put do%>
+      <%= link_to dislike_photo_path(photo),class: "heart-link", remote: true, :method => :put do%>
         <div class="liked"></div>
         <%end%>
-    <% else (current_user.voted_as_when_voted_for photo) == false%>
-    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
+    <% else %>
+    <%= link_to like_photo_path(photo), class: "heart-link", remote: true, :method => :put  do%>
         <div class="hearts"></div>
         <%end%>
     <%end%>
+
+    <a href="javascript:document.getElementById('add<%=index%>').focus()" class="likes">
+      <img src="/assets/message.png" alt="">
+    </a>
       </div>
     <%current_user.voted_as_when_voted_for photo%>
 
       <div class="newsfeed-viewsOrlikes">
-        <strong><span id="upvotes-size"><%= photo.get_upvotes.size  %></span> likes</strong>
+        <strong>
+          <span id="upvotes-size<%=photo.id%>"><%= photo.get_upvotes.size  %></span>
+
+           likes</strong>
         <script type="text/javascript">
 
         </script>
@@ -68,8 +77,7 @@
 
 
         <%= form_with(model: [photo, @comment], local: true) do |f|%>
-
-          <%= f.text_area :message, class: "add-a-comment", placeholder: "Add a comment..."%>
+          <%= f.text_area :message, id: ("add"+index.to_s), class: "add-a-comment", placeholder: "Add a comment..."%>
           <%= f.hidden_field :user_id %>
           <%= f.hidden_field :photo_id, :value => photo.id %>
           <%= f.submit %>
