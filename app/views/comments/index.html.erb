@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>User</th>
+      <th>Email</th>
+      <th>Photo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.message %></td>
+        <td><%= comment.user_id %></td>
+        <td><%= comment.user.email %></td>
+        <td><%= comment.photo_id %></td>
+        <td><%= link_to 'Show', photo_comment_path(comment.photo_id, comment.id) %></td>
+        <td><%= link_to 'Edit', edit_photo_comment_path(comment.photo_id, comment.id) %></td>
+        <td><%= link_to 'Destroy', photo_comment_path(comment.photo_id, comment.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_photo_comment_path(@photo_id) %>

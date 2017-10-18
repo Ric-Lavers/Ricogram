@@ -1,0 +1,166 @@
+// Place all the styles related to the Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-profile{
+  margin-top: 134px;
+}
+
+.profile-info{
+  max-width: 935px;
+  height: 152px;
+  margin-bottom: 44px;
+  display: flex;
+  align-items:stretch;
+  max-width: 935px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  .display-picture{
+    max-width: 150px;
+    margin:0 auto;
+
+  }
+  .dp-large{
+    width:152px;
+    height: 152px;
+    border: 1px solid rgba(0,0,0,0.1);
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  .name{
+    font-size: 28px;
+    padding:12px;
+  }
+  .edit-profile{
+    font-size: 0.8em;
+  }
+  .user-details{
+    width: 100%;
+    text-align: left;
+    // border: 1px solid red;
+  }
+  .bio{
+    padding:20px;
+  }
+  .name{
+
+    margin-left: 0;
+    max-width: 218px;
+    max-width: 50%;
+    display: flex;
+    align-items:flex-start;
+  }
+  .stats{
+    display: flex;
+    align-items: flex-start;
+    margin-left: 20px;
+    width: 60%;
+    font-size: 1.2em;
+    .num-post,.num-followers,
+  .num-following{
+      margin-left: 0;
+    }
+
+  }
+
+}
+$gapDesktop : 22px;
+
+.photo-grid{
+  // margin-left: -20px;
+  max-width: 935px;
+  display: grid;
+  grid-gap:$gapDesktop;
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+.profile-images{
+  object-fit: cover;
+  vertical-align: top;
+  width:100%;
+  height: 100%;
+
+}
+.profile-images-overlay{
+  position: relative;
+  width: 294px;
+  height:294px;
+}
+.grid-column-0{
+ grid-column: 1 / span 2;
+ max-width: calc(588px+$gridDestop);
+ width: 100%;
+}
+.grid-column-1{
+ grid-column: 2 / span 2;
+ max-width: calc(588px+$gridDestop);
+ width: 100%;
+}
+
+.profile-images-overlay:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.35);
+    opacity: 0;
+}
+.profile-images-overlay:hover:after {
+  opacity: 1;
+}
+.profile-images-overlay:hover{
+  background-color: rgba(#3F3F3F,0.3);
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 986px) {
+  .profile-images{
+    // max-width: 294px;
+    // max-height:294px;
+  }
+  .photo-grid{
+  grid-gap:24px;
+  }
+  .profile-images-overlay{
+    width:calc(33vw - 32px);
+    height:calc(33vw - 32px);
+  }
+
+  .grid-column-0{
+   width: 100%;
+  }
+  .grid-column-1{
+   width: 100%;
+  }
+}
+
+
+
+@media (max-width: 735px) {
+  body{
+    margin-left: 0px !important;
+    margin-right:0px !important;
+  }
+  .photo-grid{
+  grid-gap:2px;
+  width: 100vw
+  }
+  .profile-images-overlay{
+    margin-left: 0px;
+    margin-right:0px;
+    // width:calc(33.33vw - 2.6px);
+    width: 100%;
+
+    height:calc(33.33vw - 2.6px);
+  }
+  .grid-column-0{
+   width: 100%;
+  }
+  .grid-column-1{
+   width: 100%;
+  }
+
+}

@@ -1,0 +1,112 @@
+<p id="notice"><%= notice %></p>
+
+
+<% @photos.reverse.each do |photo| %>
+<% id = photo.id.to_i%>
+
+
+  <div class="newsfeed">
+    <%= link_to profile_path(photo.user.profile.id), class: "newsfeed-user-link" do%>
+      <div class="newsfeed-user">
+        <img class="dp"src="<%=@profiles.find_by_user_id(photo.user_id).image_url%>">
+
+        <!-- <div class="post-dp"></div> -->
+        <div class="username">
+          <p><strong><%= @profiles.find_by_user_id(photo.user_id).user_name %></strong> </p>
+        </div>
+
+      </div>
+    <%end%>
+
+    <div class="newsfeed-photo">
+      <img src="<%=photo.image_url%>">
+    </div>
+    <div class="newsfeed-likes-comments">
+      <div class="newsfeed-hearts">
+    <% if (current_user.voted_as_when_voted_for photo) == false%>
+    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
+        <div class="hearts"></div>
+        <%end%>
+    <% elsif (current_user.voted_as_when_voted_for photo) == true%>
+      <%= link_to dislike_photo_path(photo),class: "heart-link", :method => :put do%>
+        <div class="liked"></div>
+        <%end%>
+    <% else (current_user.voted_as_when_voted_for photo) == false%>
+    <%= link_to like_photo_path(photo), class: "heart-link", :method => :put  do%>
+        <div class="hearts"></div>
+        <%end%>
+    <%end%>
+      </div>
+    <%current_user.voted_as_when_voted_for photo%>
+
+      <div class="newsfeed-viewsOrlikes">
+        <strong><span id="upvotes-size"><%= photo.get_upvotes.size  %></span> likes</strong>
+        <script type="text/javascript">
+          
+        </script>
+
+      </div>
+      <div class="newsfeed-comments">
+          <strong><%=@users.find_by_id(photo.user_id).email  %></strong>
+          <%= photo.caption %>
+
+            <%if @comments.where(photo_id: (id))[0] != nil %>
+              <a class="more-comments"><span class="grey">more</span></a>
+              <span class="more_text">
+              <%comments = @comments.where(photo_id: (id))%>
+
+              <%comments.each{|i|%> <p class="newsfeed-replies" ><strong><%=@users.find_by_id(i.user_id).email%></strong>  <%=i.message%> </p><%}%>
+            <%end%>
+          </span>
+
+      </div>
+      <div class="newsfeed-hours-ago">
+        <%now = Time.now%>
+        <%= time_ago_in_words(photo.updated_at)%> ago
+      </div>
+      <div class="newsfeed-add-comment">
+
+
+        <%= form_with(model: [photo, @comment], local: true) do |f|%>
+
+          <%= f.text_area :message, class: "add-a-comment", placeholder: "Add a comment..."%>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :photo_id, :value => photo.id %>
+          <%= f.submit %>
+        <%end%>
+      </div>
+
+
+    </div>
+    <div class="">
+
+      <% link_to 'like', like_photo_path(photo), :class => "upvote", :method => :put %>
+      <% link_to 'dislike', dislike_photo_path(photo), :class => "upvote", :method => :put %>
+
+    <% photo.get_upvotes.size  %>
+    <% photo.get_downvotes.size  %>
+    <% current_user.voted_for? photo %>
+    <!-- <p>has the current used liked <strong> -->
+    <% current_user.voted_as_when_voted_for photo%>
+  <!-- </strong></p> -->
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+<%end%>
+
+
+
+
+
+
+
+<br>
+
+<%= link_to 'New Photo', new_photo_path , class: "login_out"%>
