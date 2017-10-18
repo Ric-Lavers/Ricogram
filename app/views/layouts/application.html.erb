@@ -16,7 +16,7 @@
         <div class="camera"></div>
 
         <div class="line"></div>
-        <div class="ricagram">Ricagram</div>
+        <div class="ricagram">Rictagram</div>
       </div>
 <%end%>
       <%= link_to 'Add Photo', new_photo_path %>
@@ -29,12 +29,21 @@
              <%=@current_user.email.split("@")[0][0..16]%>
           <% end %>
          </p>
-</div>
+        </div>
+
       <% if user_signed_in? %>
 
           <div class="dropdown-content">
           <%= button_to('Logout', destroy_user_session_path, method: :delete , form_class: "login_out") %>
+          <%= button_to('My Profile',user_path(current_user.id),method: :get ,form_class: "login_out")%>
+
+          <%=link_to 'Password', edit_user_registration_path, class: "login_out"%>
+
           </div>
+          <!-- <div class="dropdown-content">
+
+          </div> -->
+
 
         <% else %>
           <div class="dropdown-content">

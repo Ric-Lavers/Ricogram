@@ -1,7 +1,15 @@
 <p id="notice"><%= notice %></p>
+
+
+
+
+
+
+
 <div class="user-profile">
 
   <div class="profile-info">
+
     <div class="display-picture">
 
       <img class="dp-large" src="<%=@profile.image_url%>">
@@ -12,43 +20,64 @@
       <%=@profile.user_name%>
       <%if current_user.id == @profile.user.id%>
         <div class="edit-profile">
-          <%= link_to 'Edit profile', edit_profile_path(@profile) %>
+          <%= link_to 'Edit profile', edit_profile_url(@profile) %>
         </div>
       <%else%>
-        <div class="following">
-          <button type="button" name="button">-Following-</button>
-        </div>
+      <div class="following">
+
+        <%=form_with(model: @profile.user, method: :patch) do |form|%>
+
+          <%= form.hidden_field :toggle_follow, value: true%>
+          <%= form.button @profile.user.followed_by?(current_user) ? 'Unfollow' : 'Follow',
+        class: 'btn btn-primary btn-block', remote: true %>
+
+        <%end%>
+      </div>
+        <!--
+          <button type="button" name="button">-Following-</button> -->
+
       <%end%>
       </div>
 
-      <div class="stats">
+      <div class="stats-lg">
         <div class="num-post"><strong><%=@photos.count%></strong> posts</div>
-        <div class="num-followers"><strong></strong> followers</div>
-        <div class="num-following"><strong></strong> following</div>
+        <div class="num-followers"><strong><%=@profile.user.followers.count%></strong> followers</div>
+        <div class="num-following"><strong><%=@profile.user.following.count%></strong> following</div>
       </div>
+
       <div class="bio">
         <p><strong><%=@profile.user_name%></strong>
          <%= @profile.bio %></p>
       </div>
+
     </div>
+
+
   </div>
+
+  <div class="stats-sm">
+    <div class="num-post"> <strong><%=@photos.count%></strong><p> posts</p></div>
+    <div class="num-followers"> <strong><%=@profile.user.followers.count%></strong><p> followers</p></div>
+    <div class="num-following"> <strong><%=@profile.user.following.count%></strong><p> following</p></div>
+  </div>
+
   <%@profile.id%>
   <%params["id"] %>
   <%Photo.find_by_id(@profile.id).id %>
 
-  <br>
 
   <div class="photo-grid">
 
 <script type="text/javascript">
   count = 0;
+  b = false;
 </script>
 <script src="jquery-3.2.1.min.js"></script>
 
 
     <% @photos.reverse.each_with_index do |photo,i| %>
 
-    <div class="profile-images-overlay" id="col_<%=i%3%>">
+    <div class="profile-images-overlay" id="col_<%=i%3%>num_<%=i%>">
       <img id= "profile-images<%=i%>" class="profile-images" src="<%=photo.image_url%>">
 
     </div>
@@ -56,8 +85,7 @@
 
 <script type="text/javascript">
 console.log(document.documentElement.clientWidth);
-  // $( window ).resize(function() {
-  // if (document.documentElement.clientWidth > 986) {
+
     var daImg = document.getElementById('profile-images<%=i%>');
     var width = daImg.naturalWidth;
     var height = daImg.naturalHeight;
@@ -75,8 +103,26 @@ console.log(document.documentElement.clientWidth);
       count +=1
       daImg.parentNode.classList.add("grid-column-1");
     };
-  // };
-// });
+
+
+// // vertical span
+//     if(height/width >=1.5 && (<%=i%>+count)%3 ===0){
+//       console.log("yesh this is a doubler");
+//       count +=1
+//       b= true
+//       daImg.parentNode.classList.add("vertical-span-0");
+//     }
+//     else if(height/width >=1.5 && (<%=i%>+count)%3 ===1){
+//       console.log("yesh this is a doubler");
+//       count +=1
+//       daImg.parentNode.classList.add("vertical-span-1");
+//     };
+//     else if(height/width >=1.5 && (<%=i%>+count)%3 ===2){
+//       console.log("yesh this is a doubler");
+//       count +=1
+//       daImg.parentNode.classList.add("vertical-span-2");
+//     };
+
 
 </script>
     <%end%>
@@ -86,5 +132,5 @@ console.log(document.documentElement.clientWidth);
 </div>
 
 
-<%= link_to 'Back', profiles_path %>
+<%#= link_to 'Back', profiles_path %>
 <%=@profile.user.email%>

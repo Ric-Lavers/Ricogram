@@ -10,6 +10,7 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 gem "shrine"
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'colorize'
 
 group :development do
   gem 'guard-livereload', '~> 2.5', require: false

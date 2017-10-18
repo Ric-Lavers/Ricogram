@@ -14,8 +14,6 @@
 
     <!-- <p>@users.find_by_id(@photo.find_by_id(@photo.id).user_id).email </p> -->
 
-    <%that = @comments.where(user_id: @photo.id) %>
-
   </p>
 <div class="wrap">
   <div class="single-grid">
@@ -24,34 +22,42 @@
     </div>
     <div class="right">
       <div class="photo_user">
+
         <div class="circle">
 
         </div>
         <p>
           <strong>User:</strong>
-          <!-- @profiles.find_by_user_id(photo.user_id).user_name -->
-          <%= @photo.user.email %>
+          <%= @photo.user.profile.user_name %>
         </p>
       </div>
       <div class="comments">
           <p>
-          <strong><%= @photo.user.email %></strong>
+          <strong><%=@photo.user.profile.user_name  %></strong>
           <%= @photo.caption %>
           </p>
 
-        <% that.each do |comment| %>
+        <% @comments.each do |comment| %>
             <p>
-              <strong><%= comment.user.email %> </strong>
+              <strong><%= comment.user.profile.user_name %> </strong>
               <%= comment.message %>
             </p>
         <% end %>
       </div>
-      <div class="likes">
-        <img src="/assets/32px-heart.png" alt="">
+      <div class="flex">
+        <div class="likes">
+          <img src="/assets/32px-heart.png" alt="">
+        </div>
+
+        <a href="javascript:document.getElementById('add').focus()" class="likes">
+          <img src="/assets/message.png" alt="">
+        </a>
       </div>
+
+
       <div class="add-comment">
-      <form class="" action="index.html" method="post" >
-  <textarea name="name" rows="3" cols="80"placeholder="Add a comment..."></textarea>
+      <form  action="index.html" method="post" >
+  <textarea id="add" name="name" rows="3" cols="80"placeholder="Add a comment..."></textarea>
       </form>
       </div>
     </div>
@@ -66,6 +72,8 @@
 </p> -->
 
 
+
+<%= link_to 'Destroy', @photo, :method => :delete, :confirm => "Are you sure?" %>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

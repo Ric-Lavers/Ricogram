@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  resources :profiles
+
+  resource :profile
+
   # resources :comments
   # resources :photos do
   #   resources :comments
   # end
   devise_for :users, controllers: { registrations: "registrations" }
 
-#resources :user, only: [:show], controller: :profiles
+resources :users, only: [:show, :update], controller: :profiles
   resources :photos do
     resources :comments
     member do

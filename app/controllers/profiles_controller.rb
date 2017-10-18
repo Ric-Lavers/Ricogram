@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :js
 
   # GET /profiles
   # GET /profiles.json
@@ -12,18 +13,23 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @current_user = current_user
-    @profiles = Profile.all
-    @photoAll = Photo.all
+
+    if params[:id]
     # @photos = Photo.find_by_id(@profile.id)
-    current_profile = Profile.find_by(id: params[:id])
+      @profile = Profile.find_by!(user: params[:id])
+      @photos = @profile.user.photos
     # puts "current: #{current_profile}"
     # puts current_profile.user.id
-    @photos = Photo.where(user_id: current_profile.user.id)
+    # @photos = Photo.where(user_id: @profile.user)
+
     # verify that the photos below to the profile id shown in the url
     # @photos.each do |photo|
     #   puts Profile.find_by(user_id: photo.user_id).id
     # end
+    else
+      #set_profile is run here which gives me @profile
+      @photos = current_user.photos
+    end
   end
 
   # GET /profiles/new
@@ -34,11 +40,14 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    #@profile = Prole.find_or_initialize_by(user: current_user)
+
   end
 
   # POST /profiles
   # POST /profiles.json
   def create
+
     @profile = Profile.new(profile_params)
     @profile.user = current_user
 
@@ -57,7 +66,14 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update(profile_params)
+
+      if performing_follow?
+         #unfollow or follow depending on what in the database
+         @profile.user.toggle_followed_by(current_user)
+
+
+
+      elsif @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -65,6 +81,7 @@ class ProfilesController < ApplicationController
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /profiles/1
@@ -80,9 +97,19 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      if params[:id]
+        # A particular person’s profile page
+        # e.g. /users/5
+        @profile = Profile.find_by!(user_id: params[:id])
+      else
+        # The signed in user’s profile page
+        # /profile
+        @profile = Profile.find_by(user: current_user)
+      end
     end
-
+    def performing_follow?
+     params.dig(:user, :toggle_follow).present?
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:image, :user_name, :bio)

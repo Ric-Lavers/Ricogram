@@ -14,10 +14,10 @@
 //= require turbolinks
 //= require_tree .
 
-//= require jquery3
-//= require popper
-//= require bootstrap-sprockets
-
+// = require jquery3
+// = require popper
+// = require bootstrap-sprockets
+//= jquery_ujs
 
 // To reveal more comments on the nesfeed
 $(document).ready(function(){ /* to make sure the script runs after page load */
@@ -31,7 +31,15 @@ $(document).ready(function(){ /* to make sure the script runs after page load */
 
 $(function(){
   $(".hearts").click(function(){
-    $(this).toggleClass('liked');
+    $(this).removeClass('hearts');
+    $(this).addClass('liked');
+  });
+});
+
+$(function(){
+  $(".liked").click(function(){
+    $(this).removeClass('liked');
+    $(this).addClass('hearts');
   });
 });
 // $(function(){
