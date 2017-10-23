@@ -13,7 +13,8 @@ s3_options = {
 }
 
 Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"),
+  # cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"),
+  cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
   # store: Shrine::Storage::FileSystem.new("public", prefix: "uploads/store"),
   store: Shrine::Storage::S3.new(prefix: "store", **s3_options),
 }
