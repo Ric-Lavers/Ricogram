@@ -12,6 +12,8 @@ gem "shrine"
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'colorize'
 gem "aws-sdk-s3", "~> 1.2"
+gem 'cloudinary'
+gem 'shrine-cloudinary'
 group :development do
     gem 'dotenv-rails'
 end

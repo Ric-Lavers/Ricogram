@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20171010104315) do
 
   create_table "comments", force: :cascade do |t|
-    t.text "message"
+    t.text "message", null: false
     t.integer "user_id"
     t.integer "photo_id"
     t.datetime "created_at", null: false
