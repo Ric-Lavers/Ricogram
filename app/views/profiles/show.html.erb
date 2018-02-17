@@ -61,18 +61,13 @@
     <div class="num-following"> <strong><%=@profile.user.following.count%></strong><p> following</p></div>
   </div>
 
-  <%@profile.id%>
-  <%params["id"] %>
-  <%Photo.find_by_id(@profile.id).id %>
-
-
   <div class="photo-grid">
 
-<script type="text/javascript">
-  count = 0;
-  b = false;
-</script>
-<script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+      count = 0;
+      b = false;
+    </script>
+    <script src="jquery-3.2.1.min.js"></script>
 
 
     <% @photos.reverse.each_with_index do |photo,i| %>

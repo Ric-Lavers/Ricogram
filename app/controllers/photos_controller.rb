@@ -1,6 +1,12 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: :edit
 
+  def require_permission
+    if current_user != Photo.find(params[:id]).user
+      redirect_to root_path
+    end
+  end
   # GET /photos
   # GET /photos.json
   def index
